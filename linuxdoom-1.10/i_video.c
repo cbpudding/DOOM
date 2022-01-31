@@ -47,7 +47,7 @@ int XShmGetEventBase( Display* dpy ); // problems with g++?
 #include <sys/socket.h>
 
 #include <netinet/in.h>
-#include <errnos.h>
+#include <errno.h>
 #include <signal.h>
 
 #include "doomstat.h"
@@ -90,6 +90,14 @@ int		doPointerWarp = POINTER_WARP_COUNTDOWN;
 // to use ....
 static int	multiply=1;
 
+struct palette_map_t {
+	uint8_t red;
+	uint8_t green;
+	uint8_t blue;
+};
+
+static struct palette_map_t palettemap[257];
+static char imagebuff[SCREENHEIGHT][SCREENWIDTH][4];
 
 //
 //  Translates the key currently in X_event
@@ -355,14 +363,14 @@ void I_FinishUpdate (void)
 
     static int	lasttic;
     int		tics;
-    int		i;
+    //int		i;
     // UNUSED static unsigned char *bigscreen=0;
 
     // draws little dots on the bottom of the screen
     if (devparm)
     {
 
-	i = I_GetTime();
+	int i = I_GetTime();
 	tics = i - lasttic;
 	lasttic = i;
 	if (tics > 20) tics = 20;
@@ -374,7 +382,7 @@ void I_FinishUpdate (void)
     
     }
 
-    // scales the screen size before blitting it
+    /*// scales the screen size before blitting it
     if (multiply == 2)
     {
 	unsigned int *olineptrs[2];
@@ -503,7 +511,18 @@ void I_FinishUpdate (void)
 
     }
     else
-    {
+    {*/
+
+	int i = 0;
+	for(int h = 0; h < SCREENHEIGHT; h++) {
+		for(int w = 0; w < SCREENWIDTH; w++) {
+			unsigned char color = screens[0][i++];
+			struct palette_map_t map = palettemap[color];
+			imagebuff[h][w][0] = map.blue;
+			imagebuff[h][w][1] = map.green;
+			imagebuff[h][w][2] = map.red;
+		}
+	}
 
 	// draw the image
 	XPutImage(	X_display,
@@ -517,7 +536,7 @@ void I_FinishUpdate (void)
 	// sync up with server
 	XSync(X_display, False);
 
-    }
+    //}
 
 }
 
@@ -582,7 +601,15 @@ void UploadNewPalette(Colormap cmap, byte *palette)
 //
 void I_SetPalette (byte* palette)
 {
-    UploadNewPalette(X_cmap, palette);
+    //UploadNewPalette(X_cmap, palette);
+	for(int i = 0; i < 256; i++) {
+		palettemap[i].red = gammatable[usegamma][*palette++];
+		palettemap[i].green = gammatable[usegamma][*palette++];
+		palettemap[i].blue = gammatable[usegamma][*palette++];
+	}
+	palettemap[256].red = 0;
+	palettemap[256].green = 0;
+	palettemap[256].blue = 0;
 }
 
 
@@ -667,7 +694,7 @@ void grabsharedmemory(int size)
       id = shmget((key_t)key, size, IPC_CREAT|0777);
       if (id==-1)
       {
-	extern int errno;
+
 	fprintf(stderr, "errno=%d\n", errno);
 	I_Error("Could not get any shared memory");
       }
@@ -769,8 +796,8 @@ void I_InitGraphics(void)
 
     // use the default visual 
     X_screen = DefaultScreen(X_display);
-    if (!XMatchVisualInfo(X_display, X_screen, 8, PseudoColor, &X_visualinfo))
-	I_Error("xdoom currently only supports 256-color PseudoColor screens");
+    if (!XMatchVisualInfo(X_display, X_screen, 24, TrueColor, &X_visualinfo))
+	I_Error("This version of xdoom currently only supports 24-bit TrueColor screens");
     X_visual = X_visualinfo.visual;
 
     // check for the MITSHM extension
@@ -792,18 +819,18 @@ void I_InitGraphics(void)
     fprintf(stderr, "Using MITSHM extension\n");
 
     // create the colormap
-    X_cmap = XCreateColormap(X_display, RootWindow(X_display,
-						   X_screen), X_visual, AllocAll);
+    /*X_cmap = XCreateColormap(X_display, RootWindow(X_display,
+						   X_screen), X_visual, AllocAll);*/
 
     // setup attributes for main window
-    attribmask = CWEventMask | CWColormap | CWBorderPixel;
+    attribmask = CWEventMask | CWBorderPixel;
     attribs.event_mask =
 	KeyPressMask
 	| KeyReleaseMask
 	// | PointerMotionMask | ButtonPressMask | ButtonReleaseMask
 	| ExposureMask;
 
-    attribs.colormap = X_cmap;
+    //attribs.colormap = X_cmap;
     attribs.border_pixel = 0;
 
     // create the main window
@@ -812,7 +839,7 @@ void I_InitGraphics(void)
 					x, y,
 					X_width, X_height,
 					0, // borderwidth
-					8, // depth
+					24, // depth
 					InputOutput,
 					X_visual,
 					attribmask,
@@ -832,7 +859,7 @@ void I_InitGraphics(void)
     // map the window
     XMapWindow(X_display, X_mainWindow);
 
-    // wait until it is OK to draw
+    /*// wait until it is OK to draw
     oktodraw = 0;
     while (!oktodraw)
     {
@@ -895,22 +922,22 @@ void I_InitGraphics(void)
 
     }
     else
-    {
+    {*/
 	image = XCreateImage(	X_display,
     				X_visual,
-    				8,
+    				24,
     				ZPixmap,
     				0,
-    				(char*)malloc(X_width * X_height),
+    				(char*) imagebuff,
     				X_width, X_height,
     				8,
-    				X_width );
+    				0 );
 
-    }
+    /*}
 
     if (multiply == 1)
 	screens[0] = (unsigned char *) (image->data);
-    else
+    else*/
 	screens[0] = (unsigned char *) malloc (SCREENWIDTH * SCREENHEIGHT);
 
 }
