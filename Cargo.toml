@@ -8,3 +8,6 @@ license = "GPL-2.0-only"
 publish = false
 
 [dependencies]
+
+[build-dependencies]
+bindgen = "^0.59.2"

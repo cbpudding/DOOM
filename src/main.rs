@@ -1,9 +1,11 @@
-use std::{env, ffi::CString, os::raw::{c_char, c_int}, ptr};
+use std::{env, ffi::CString, os::raw::c_int, ptr};
 
-extern "C" {
-    pub static mut myargc: c_int;
-    pub static mut myargv: *mut *mut c_char;
-    pub fn D_DoomMain();
+mod doom {
+    #![allow(non_camel_case_types)]
+    #![allow(non_upper_case_globals)]
+    #![allow(non_snake_case)]
+    #![allow(unused)]
+    include!(concat!(env!("OUT_DIR"), "/doom.rs"));
 }
 
 fn main() {
@@ -13,8 +15,8 @@ fn main() {
     }
     args.push(ptr::null_mut());
     unsafe {
-        myargc = (args.len() - 1) as c_int;
-        myargv = args.as_mut_ptr();
-        D_DoomMain();
+        doom::myargc = (args.len() - 1) as c_int;
+        doom::myargv = args.as_mut_ptr();
+        doom::D_DoomMain();
     }
 }
