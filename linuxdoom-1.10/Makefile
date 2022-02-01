@@ -77,15 +77,18 @@ OBJS=				\
 		$(O)/info.o				\
 		$(O)/sounds.o
 
-all:	 $(O)/linuxxdoom
+all:	 $(O)/liblinuxxdoom.a
 
 clean:
 	rm -f *.o *~ *.flc
 	rm -f linux/*
 
-$(O)/linuxxdoom:	$(OBJS) $(O)/i_main.o
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(O)/i_main.o \
-	-o $(O)/linuxxdoom $(LIBS)
+#$(O)/linuxxdoom:	$(OBJS) $(O)/i_main.o
+#	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(O)/i_main.o \
+#	-o $(O)/linuxxdoom $(LIBS)
+
+$(O)/liblinuxxdoom.a: $(OBJS)
+	$(AR) -rc $(O)/liblinuxxdoom.a $^
 
 $(O)/%.o:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@

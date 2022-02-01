@@ -1,0 +1,10 @@
+[package]
+name = "doom"
+version = "1.10.1"
+authors = ["id Software", "Alexander Hill <ahill@breadpudding.dev>"]
+edition = "2021"
+readme = "readme.txt"
+license = "GPL-2.0-only"
+publish = false
+
+[dependencies]
