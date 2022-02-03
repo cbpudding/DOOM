@@ -16,7 +16,6 @@ O=linux
 # not too sophisticated dependency
 OBJS=				\
 		$(O)/doomdef.o		\
-		$(O)/doomstat.o		\
 		$(O)/dstrings.o		\
 		$(O)/i_system.o		\
 		$(O)/i_sound.o		\

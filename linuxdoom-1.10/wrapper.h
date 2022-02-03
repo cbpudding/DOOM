@@ -13,7 +13,6 @@
 #include "d_ticcmd.h"
 #include "doomdata.h"
 #include "doomdef.h"
-#include "doomstat.h"
 #include "dstrings.h"
 #include "f_finale.h"
 #include "f_wipe.h"

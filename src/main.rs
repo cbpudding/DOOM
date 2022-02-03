@@ -8,6 +8,9 @@ mod doom {
     include!(concat!(env!("OUT_DIR"), "/doom.rs"));
 }
 
+mod doomstat;
+mod types;
+
 fn main() {
     let mut args = Vec::new();
     for arg in env::args() {
