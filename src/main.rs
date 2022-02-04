@@ -9,6 +9,7 @@ mod doom {
 }
 
 mod doomstat;
+mod rendering;
 mod types;
 
 fn main() {
