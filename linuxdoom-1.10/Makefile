@@ -35,7 +35,6 @@ OBJS=				\
 		$(O)/m_fixed.o		\
 		$(O)/m_swap.o			\
 		$(O)/m_cheat.o		\
-		$(O)/m_random.o		\
 		$(O)/am_map.o			\
 		$(O)/p_ceilng.o		\
 		$(O)/p_doors.o		\
@@ -62,7 +61,6 @@ OBJS=				\
 		$(O)/r_main.o			\
 		$(O)/r_plane.o		\
 		$(O)/r_segs.o			\
-		$(O)/r_sky.o			\
 		$(O)/r_things.o		\
 		$(O)/w_wad.o			\
 		$(O)/wi_stuff.o		\

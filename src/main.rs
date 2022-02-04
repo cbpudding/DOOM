@@ -9,6 +9,7 @@ mod doom {
 }
 
 mod doomstat;
+mod misc;
 mod rendering;
 mod types;
 
