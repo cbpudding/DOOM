@@ -21,12 +21,12 @@ const RANDOM_TABLE: [u8; 256] = [
     249
 ];
 
-#[link(name = "rndindex")]
+#[export_name = "rndindex"]
 pub static mut RANDOM_INDEX: c_int = 0;
 
 static mut PRANDOM_INDEX: c_int = 0;
 
-#[link(name = "M_ClearRandom")]
+#[export_name = "M_ClearRandom"]
 pub extern "C" fn clear_random() {
     unsafe {
         RANDOM_INDEX = 0;
@@ -34,7 +34,7 @@ pub extern "C" fn clear_random() {
     }
 }
 
-#[link(name = "M_Random")]
+#[export_name = "M_Random"]
 pub extern "C" fn m_random() -> c_int {
     unsafe {
         RANDOM_INDEX = (RANDOM_INDEX + 1) & 0xFF;
@@ -42,7 +42,7 @@ pub extern "C" fn m_random() -> c_int {
     }
 }
 
-#[link(name = "P_Random")]
+#[export_name = "P_Random"]
 pub extern "C" fn p_random() -> c_int {
     unsafe {
         PRANDOM_INDEX = (PRANDOM_INDEX + 1) & 0xFF;

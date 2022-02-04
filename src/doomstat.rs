@@ -1,17 +1,17 @@
-use crate::types::{GameMode, GameMission, Language};
+use crate::types::{GameMission, GameMode, Language};
 
-#[link(name = "gamemode")]
+#[export_name = "gamemode"]
 #[used]
 pub static mut GAMEMODE: GameMode = GameMode::Indetermined;
 
-#[link(name = "gamemission")]
+#[export_name = "gamemission"]
 #[used]
 pub static mut GAMEMISSION: GameMission = GameMission::None;
 
-#[link(name = "language")]
+#[export_name = "language"]
 #[used]
 pub static mut LANGUAGE: Language = Language::English;
 
-#[link(name = "modifiedgame")]
+#[export_name = "modifiedgame"]
 #[used]
 pub static mut MODIFIED_GAME: bool = false;
