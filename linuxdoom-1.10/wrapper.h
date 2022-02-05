@@ -23,7 +23,6 @@
 #include "i_system.h"
 #include "i_video.h"
 #include "info.h"
-#include "m_cheat.h"
 #include "m_fixed.h"
 #include "m_menu.h"
 #include "m_misc.h"

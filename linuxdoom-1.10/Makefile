@@ -31,7 +31,6 @@ OBJS=				\
 		$(O)/m_misc.o			\
 		$(O)/m_fixed.o		\
 		$(O)/m_swap.o			\
-		$(O)/m_cheat.o		\
 		$(O)/am_map.o			\
 		$(O)/p_ceilng.o		\
 		$(O)/p_doors.o		\

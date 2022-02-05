@@ -1,5 +1,5 @@
 use crate::info::StateNumber;
-use std::os::raw::c_int;
+use std::os::raw::{c_char, c_int};
 
 pub type Fixed = c_int;
 
@@ -10,6 +10,12 @@ pub enum AmmoType {
     Cell,
     Missile,
     NoAmmo = 6
+}
+
+#[repr(C)]
+pub struct CheatSeq {
+    pub sequence: *mut c_char,
+    pub p: *mut c_char
 }
 
 #[repr(C)]
