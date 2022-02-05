@@ -8,10 +8,11 @@ mod doom {
     include!(concat!(env!("OUT_DIR"), "/doom.rs"));
 }
 
-mod doomstat;
+mod global;
 mod misc;
 mod rendering;
 mod types;
+mod util;
 
 fn main() {
     let mut args = Vec::new();
@@ -20,8 +21,8 @@ fn main() {
     }
     args.push(ptr::null_mut());
     unsafe {
-        doom::myargc = (args.len() - 1) as c_int;
-        doom::myargv = args.as_mut_ptr();
+        global::MY_ARGC = (args.len() - 1) as c_int;
+        global::MY_ARGV = args.as_mut_ptr();
         doom::D_DoomMain();
     }
 }
