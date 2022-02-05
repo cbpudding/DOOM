@@ -1,4 +1,6 @@
 // No, I don't want to give these readable names right now.
+#[allow(dead_code)]
+#[allow(non_camel_case_types)]
 #[repr(C)]
 pub enum StateNumber {
     S_NULL,
