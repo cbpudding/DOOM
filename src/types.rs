@@ -1,6 +1,16 @@
+use crate::info::StateNumber;
 use std::os::raw::c_int;
 
 pub type Fixed = c_int;
+
+#[repr(C)]
+pub enum AmmoType {
+    Clip,
+    Shell,
+    Cell,
+    Missile,
+    NoAmmo = 6
+}
 
 #[repr(C)]
 pub enum GameMode {
@@ -26,4 +36,14 @@ pub enum Language {
     French,
     German,
     Unknown
+}
+
+#[repr(C)]
+pub struct WeaponInfo {
+    pub ammo: AmmoType,
+    pub up_state: StateNumber,
+    pub down_state: StateNumber,
+    pub ready_state: StateNumber,
+    pub attack_state: StateNumber,
+    pub flash_state: StateNumber
 }

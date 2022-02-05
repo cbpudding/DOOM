@@ -4,7 +4,6 @@
 #include "am_map.h"
 #include "d_englsh.h"
 #include "d_french.h"
-#include "d_items.h"
 #include "d_main.h"
 #include "d_net.h"
 #include "d_player.h"
