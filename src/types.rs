@@ -1,3 +1,7 @@
+use std::os::raw::c_int;
+
+pub type Fixed = c_int;
+
 #[repr(C)]
 pub enum GameMode {
     Shareware,

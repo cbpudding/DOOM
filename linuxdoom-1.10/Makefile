@@ -30,7 +30,6 @@ OBJS=				\
 		$(O)/g_game.o			\
 		$(O)/m_menu.o			\
 		$(O)/m_misc.o			\
-		$(O)/m_bbox.o			\
 		$(O)/m_fixed.o		\
 		$(O)/m_swap.o			\
 		$(O)/m_cheat.o		\
