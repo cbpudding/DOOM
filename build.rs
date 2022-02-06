@@ -1,6 +1,10 @@
-use std::{env, path::PathBuf, process::Command};
+use std::{env, fs, path::{Path, PathBuf}, process::Command};
 
 fn main() {
+    // The Makefile relies on the "linux" directory to function. ~Alex
+    if !Path::new("linuxdoom-1.10/linux").exists() {
+        fs::create_dir("linuxdoom-1.10/linux").unwrap();
+    }
     println!("cargo:rerun-if-changed=linuxdoom-1.10/wrapper.h");
     let bindings = bindgen::Builder::default()
         .header("linuxdoom-1.10/wrapper.h")
@@ -16,6 +20,7 @@ fn main() {
         .blocklist_item("FP_ZERO")
         .blocklist_item("FP_SUBNORMAL")
         .blocklist_item("FP_NORMAL")
+        .blocklist_item("vsprintf") // Incorrect type signature
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
         .generate()
         .unwrap();
