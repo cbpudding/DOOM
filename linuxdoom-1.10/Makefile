@@ -15,7 +15,6 @@ O=linux
 
 # not too sophisticated dependency
 OBJS=				\
-		$(O)/dstrings.o		\
 		$(O)/i_system.o		\
 		$(O)/i_sound.o		\
 		$(O)/i_video.o		\

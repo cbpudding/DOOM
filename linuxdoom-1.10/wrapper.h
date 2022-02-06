@@ -12,7 +12,6 @@
 #include "d_ticcmd.h"
 #include "doomdata.h"
 #include "doomdef.h"
-#include "dstrings.h"
 #include "f_finale.h"
 #include "f_wipe.h"
 #include "g_game.h"

@@ -1,3 +1,37 @@
+use byte_strings::c_str;
+use std::os::raw::c_char;
+
+#[export_name = "endmsg"]
+pub static mut END_MESSAGES: [*const c_char; 23] = [
+    // DOOM
+    c_str!("are you sure you want to\nquit this great game?").as_ptr(),
+    c_str!("please don't leave, there's more\ndemons to toast!").as_ptr(),
+    c_str!("let's beat it -- this is turning\ninto a bloodbath!").as_ptr(),
+    c_str!("i wouldn't leave if i were you.\ndos is much worse.").as_ptr(),
+    c_str!("you're trying to say you like dos\nbetter than me, right?").as_ptr(),
+    c_str!("don't leave yet -- there's a\ndemon around that corner!").as_ptr(),
+    c_str!("ya know, next time you come in here\ni'm gonna toast ya.").as_ptr(),
+    c_str!("go ahead and leave. see if i care.").as_ptr(),
+    // DOOM II
+    c_str!("you want to quit?\nthen, thou hast lost an eighth!").as_ptr(),
+    c_str!("don't go now, there's a \ndimensional shambler waiting\nat the dos prompt!").as_ptr(),
+    c_str!("get outta here and go back\nto your boring programs.").as_ptr(),
+    c_str!("if i were your boss, i'd \n deathmatch ya in a minute!").as_ptr(),
+    c_str!("look, bud. you leave now\nand you forfeit your body count!").as_ptr(),
+    c_str!("just leave. when you come\nback, i'll be waiting with a bat.").as_ptr(),
+    c_str!("you're lucky i don't smack\nyou for thinking about leaving.").as_ptr(),
+    // FinalDOOM
+    c_str!("fuck you, pussy!\nget the fuck out!").as_ptr(),
+    c_str!("you quit and i'll jizz\nin your cystholes!").as_ptr(),
+    c_str!("if you leave, i'll make\nthe lord drink my jizz.").as_ptr(),
+    c_str!("hey, ron! can we say\n'fuck' in the game?").as_ptr(),
+    c_str!("i'd leave: this is just\nmore monsters and levels.\nwhat a load.").as_ptr(),
+    c_str!("suck it down, asshole!\nyou're a fucking wimp!").as_ptr(),
+    c_str!("don't quit now! we're \nstill spending your money!").as_ptr(),
+    // Debug
+    c_str!("THIS IS NO MESSAGE!\nPage intentionally left blank.").as_ptr()
+];
+
 // No, I don't want to give these readable names right now.
 #[allow(dead_code)]
 #[allow(non_camel_case_types)]
