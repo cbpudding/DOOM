@@ -19,7 +19,6 @@
 #include "hu_stuff.h"
 #include "i_net.h"
 #include "i_sound.h"
-#include "i_system.h"
 #include "i_video.h"
 #include "info.h"
 #include "m_menu.h"

@@ -1,5 +1,5 @@
 use crate::info::StateNumber;
-use std::os::raw::{c_char, c_int};
+use std::os::raw::{c_char, c_int, c_short};
 
 pub type Fixed = c_int;
 
@@ -42,6 +42,16 @@ pub enum Language {
     French,
     German,
     Unknown
+}
+
+#[repr(C)]
+pub struct Ticcmd {
+    pub forward_move: c_char,
+    pub side_move: c_char,
+    pub angle_turn: c_short,
+    pub consistency: c_short,
+    pub chat_char: u8,
+    pub buttons: u8
 }
 
 #[repr(C)]

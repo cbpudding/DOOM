@@ -16,6 +16,7 @@ fn main() {
         .blocklist_item("FP_ZERO")
         .blocklist_item("FP_SUBNORMAL")
         .blocklist_item("FP_NORMAL")
+        .blocklist_item("vsprintf") // Incorrect type signature
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
         .generate()
         .unwrap();

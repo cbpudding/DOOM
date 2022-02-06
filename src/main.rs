@@ -1,3 +1,4 @@
+#![feature(c_variadic)]
 #![feature(const_cstr_unchecked)]
 
 use std::{env, ffi::CString, os::raw::c_int, ptr};
@@ -14,6 +15,7 @@ mod general;
 mod global;
 mod info;
 mod misc;
+mod native;
 mod rendering;
 mod types;
 mod util;
