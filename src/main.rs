@@ -11,6 +11,7 @@ mod doom {
     include!(concat!(env!("OUT_DIR"), "/doom.rs"));
 }
 
+mod finale;
 mod general;
 mod global;
 mod info;
