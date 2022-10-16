@@ -9,7 +9,7 @@ pub enum AmmoType {
     Shell,
     Cell,
     Missile,
-    NoAmmo = 6
+    NoAmmo = 5
 }
 
 #[repr(C)]
