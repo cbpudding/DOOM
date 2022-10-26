@@ -1,4 +1,9 @@
-use std::{ffi::{CStr, CString}, mem, os::raw::{c_char, c_int}, slice};
+use std::{
+    ffi::{CStr, CString},
+    mem,
+    os::raw::{c_char, c_int},
+    slice,
+};
 
 #[export_name = "M_CheckParm"]
 pub extern "C" fn check_parm(check: *mut c_char) -> c_int {
@@ -16,7 +21,5 @@ pub extern "C" fn check_parm(check: *mut c_char) -> c_int {
 
 // Hopefully we'll be able to get rid of this thing when the code is a bit more Rust-y
 pub fn get_args() -> &'static mut [*mut c_char] {
-    unsafe {
-        slice::from_raw_parts_mut(crate::global::MY_ARGV, crate::global::MY_ARGC as usize)
-    }
+    unsafe { slice::from_raw_parts_mut(crate::global::MY_ARGV, crate::global::MY_ARGC as usize) }
 }
