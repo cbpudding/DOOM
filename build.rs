@@ -1,4 +1,8 @@
-use std::{env, fs, path::{Path, PathBuf}, process::Command};
+use std::{
+    env, fs,
+    path::{Path, PathBuf},
+    process::Command,
+};
 
 fn main() {
     // The Makefile relies on the "linux" directory to function. ~Alex
@@ -26,10 +30,20 @@ fn main() {
         .unwrap();
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
     bindings.write_to_file(out_path.join("doom.rs")).unwrap();
-    if !Command::new("make").args(["-C", "linuxdoom-1.10/", "clean"]).status().unwrap().success() {
+    if !Command::new("make")
+        .args(["-C", "linuxdoom-1.10/", "clean"])
+        .status()
+        .unwrap()
+        .success()
+    {
         panic!("Failed to clean C code!");
     }
-    if !Command::new("make").args(["-C", "linuxdoom-1.10/"]).status().unwrap().success() {
+    if !Command::new("make")
+        .args(["-C", "linuxdoom-1.10/"])
+        .status()
+        .unwrap()
+        .success()
+    {
         panic!("Failed to build C code!");
     }
     println!("cargo:rerun-if-changed=linuxdoom-1.10/Makefile");

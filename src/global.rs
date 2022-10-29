@@ -1,5 +1,8 @@
 use crate::types::{GameMission, GameMode, Language};
-use std::{os::raw::{c_char, c_int}, ptr};
+use std::{
+    os::raw::{c_char, c_int},
+    ptr,
+};
 
 pub const TICK_RATE: c_int = 35;
 

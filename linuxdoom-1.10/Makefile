@@ -20,7 +20,6 @@ OBJS=				\
 		$(O)/i_net.o			\
 		$(O)/tables.o			\
 		$(O)/f_finale.o		\
-		$(O)/f_wipe.o 		\
 		$(O)/d_main.o			\
 		$(O)/d_net.o			\
 		$(O)/g_game.o			\

@@ -1,5 +1,4 @@
 #![feature(c_variadic)]
-#![feature(const_cstr_unchecked)]
 
 use std::{env, ffi::CString, os::raw::c_int, ptr};
 

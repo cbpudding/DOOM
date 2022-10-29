@@ -29,7 +29,7 @@ pub static mut END_MESSAGES: [*const c_char; 23] = [
     c_str!("suck it down, asshole!\nyou're a fucking wimp!").as_ptr(),
     c_str!("don't quit now! we're \nstill spending your money!").as_ptr(),
     // Debug
-    c_str!("THIS IS NO MESSAGE!\nPage intentionally left blank.").as_ptr()
+    c_str!("THIS IS NO MESSAGE!\nPage intentionally left blank.").as_ptr(),
 ];
 
 // No, I don't want to give these readable names right now.
@@ -1003,5 +1003,5 @@ pub enum StateNumber {
     S_TECH2LAMP,
     S_TECH2LAMP2,
     S_TECH2LAMP3,
-    S_TECH2LAMP4
+    S_TECH2LAMP4,
 }
