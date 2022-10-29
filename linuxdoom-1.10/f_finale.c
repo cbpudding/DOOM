@@ -49,9 +49,11 @@ static const char rcsid[] =
 
 // Stage of animation:
 //  0 = text, 1 = art screen, 2 = character cast
-int finalestage;
+//int finalestage;
 
-int finalecount;
+//int finalecount;
+
+#include "f_finale.h"
 
 #define TEXTSPEED 3
 #define TEXTWAIT 250
@@ -82,8 +84,8 @@ char *t4text = T4TEXT;
 char *t5text = T5TEXT;
 char *t6text = T6TEXT;
 
-char *finaletext;
-char *finaleflat;
+//char *finaletext;
+//char *finaleflat;
 
 void F_StartCast(void);
 void F_CastTicker(void);
@@ -93,7 +95,7 @@ void F_CastDrawer(void);
 //
 // F_StartFinale
 //
-void F_StartFinale(void) {
+void OF_StartFinale(void) {
   gameaction = ga_nothing;
   gamestate = GS_FINALE;
   viewactive = false;
@@ -182,7 +184,7 @@ void F_StartFinale(void) {
   finalecount = 0;
 }
 
-boolean F_Responder(event_t *event) {
+boolean OF_Responder(event_t *event) {
   if (finalestage == 2)
     return F_CastResponder(event);
 
@@ -192,7 +194,7 @@ boolean F_Responder(event_t *event) {
 //
 // F_Ticker
 //
-void F_Ticker(void) {
+void OF_Ticker(void) {
   int i;
 
   // check for skipping
@@ -237,7 +239,7 @@ void F_Ticker(void) {
 #include "hu_stuff.h"
 extern patch_t *hu_font[HU_FONTSIZE];
 
-void F_TextWrite(void) {
+void OF_TextWrite(void) {
   byte *src;
   byte *dest;
 
@@ -327,20 +329,20 @@ castinfo_t castorder[] = {{CC_ZOMBIE, MT_POSSESSED},
 
                           {NULL, 0}};
 
-int castnum;
-int casttics;
-state_t *caststate;
-boolean castdeath;
-int castframes;
-int castonmelee;
-boolean castattacking;
+//int castnum;
+///int casttics;
+//state_t *caststate;
+//boolean castdeath;
+//int castframes;
+//int castonmelee;
+//boolean castattacking;
 
 //
 // F_StartCast
 //
 extern gamestate_t wipegamestate;
 
-void F_StartCast(void) {
+void OF_StartCast(void) {
   wipegamestate = -1; // force a screen wipe
   castnum = 0;
   caststate = &states[mobjinfo[castorder[castnum].type].seestate];
@@ -356,7 +358,7 @@ void F_StartCast(void) {
 //
 // F_CastTicker
 //
-void F_CastTicker(void) {
+void OF_CastTicker(void) {
   int st;
   int sfx;
 
@@ -487,7 +489,7 @@ void F_CastTicker(void) {
 // F_CastResponder
 //
 
-boolean F_CastResponder(event_t *ev) {
+boolean OF_CastResponder(event_t *ev) {
   if (ev->type != ev_keydown)
     return false;
 
@@ -506,7 +508,7 @@ boolean F_CastResponder(event_t *ev) {
   return true;
 }
 
-void F_CastPrint(char *text) {
+void OF_CastPrint(char *text) {
   char *ch;
   int c;
   int cx;
@@ -555,7 +557,7 @@ void F_CastPrint(char *text) {
 //
 void V_DrawPatchFlipped(int x, int y, int scrn, patch_t *patch);
 
-void F_CastDrawer(void) {
+void OF_CastDrawer(void) {
   spritedef_t *sprdef;
   spriteframe_t *sprframe;
   int lump;
@@ -583,7 +585,7 @@ void F_CastDrawer(void) {
 //
 // F_DrawPatchCol
 //
-void F_DrawPatchCol(int x, patch_t *patch, int col) {
+void OF_DrawPatchCol(int x, patch_t *patch, int col) {
   column_t *column;
   byte *source;
   byte *dest;
@@ -610,7 +612,7 @@ void F_DrawPatchCol(int x, patch_t *patch, int col) {
 //
 // F_BunnyScroll
 //
-void F_BunnyScroll(void) {
+void OF_BunnyScroll(void) {
   int scrolled;
   int x;
   patch_t *p1;
@@ -662,7 +664,7 @@ void F_BunnyScroll(void) {
 //
 // F_Drawer
 //
-void F_Drawer(void) {
+void OF_Drawer(void) {
   if (finalestage == 2) {
     F_CastDrawer();
     return;
