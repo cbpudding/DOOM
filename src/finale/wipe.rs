@@ -97,7 +97,7 @@ pub extern "C" fn init_melt(width: c_int, height: c_int, _ticks: c_int) -> c_int
 
 #[export_name = "wipe_doMelt"]
 pub extern "C" fn do_melt(width: c_int, height: c_int, ticks: c_int) -> c_int {
-    let y_slice = unsafe { slice::from_raw_parts_mut(Y as *mut c_short, width as _) };
+    let y_slice = unsafe { slice::from_raw_parts_mut(Y, width as _) };
     let mut done = true;
     let half_width = width / 2;
     let mut remaining = ticks;
@@ -107,14 +107,14 @@ pub extern "C" fn do_melt(width: c_int, height: c_int, ticks: c_int) -> c_int {
                 if y_slice[i] < 0 {
                     y_slice[i] += 1;
                     done = false;
-                } else if y_slice[i] < height as c_short {
+                } else if y_slice[i] < height {
                     let mut dy = if y_slice[i] < 16 {
                         y_slice[i] + 1
                     } else {
                         8
                     };
-                    if y_slice[i] + dy >= height as c_short {
-                        dy = height as c_short - y_slice[i];
+                    if y_slice[i] + dy >= height {
+                        dy = height - y_slice[i];
                     }
                     let mut s = WIPE_SCR_END.offset((i * height as usize + y_slice[i] as usize) as isize * mem::size_of::<c_short>() as isize) as *mut c_short;
                     let mut d = WIPE_SCR.offset((y_slice[i] as usize * half_width as usize + i) as isize * mem::size_of::<c_short>() as isize) as *mut c_short;
