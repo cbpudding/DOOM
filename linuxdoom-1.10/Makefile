@@ -18,7 +18,6 @@ OBJS=				\
 		$(O)/i_sound.o		\
 		$(O)/i_video.o		\
 		$(O)/i_net.o			\
-		$(O)/tables.o			\
 		$(O)/f_finale.o		\
 		$(O)/d_main.o			\
 		$(O)/d_net.o			\
