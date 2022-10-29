@@ -63,6 +63,7 @@ pub extern "C" fn get_param(cheat: *mut CheatSeq, buffer: *mut c_char) {
         while *p != 1 {
             p = p.offset(1);
         }
+        p = p.offset(1);
         while {
             c = *p;
             *buf = c;
